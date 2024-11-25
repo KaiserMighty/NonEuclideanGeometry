@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbc8rv5eyjf3g"]
+
+[ext_resource type="PackedScene" uid="uid://bp4fltvanq4u6" path="res://entities/player.tscn" id="1_qtdyj"]
+[ext_resource type="Material" uid="uid://cy4vmpccjf04u" path="res://assets/orange_debug.tres" id="2_lk3dn"]
+
+[node name="World" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_qtdyj")]
+
+[node name="Terrain" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(50, 5, 50)
+material = ExtResource("2_lk3dn")
+
+[node name="Walls" type="CSGBox3D" parent="Terrain"]
+operation = 2
+size = Vector3(49, 5, 49)
+material = ExtResource("2_lk3dn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 29.1745, 0)
