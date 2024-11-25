@@ -23,6 +23,7 @@ window/size/viewport_height=768
 [global_group]
 
 player="The Player's Group"
+camera="Player's Camera"
 
 [input]
 
