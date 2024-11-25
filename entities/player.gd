@@ -21,7 +21,7 @@ func _physics_process(delta):
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
@@ -50,7 +50,7 @@ func _input(event: InputEvent):
 
 
 func _rotate_camera(delta: float, sens_mod: float = 1.0):
-	var input = Input.get_vector("look_left", "look_right", "look_down", "look_up")
+	var input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	look_dir += input
 	rotation.y -= look_dir.x * camera_sens * delta
 	camera.rotation.x = clamp(camera.rotation.x - look_dir.y * camera_sens * sens_mod * delta, -1.5, 1.5)
