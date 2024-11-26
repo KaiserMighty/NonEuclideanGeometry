@@ -3,12 +3,13 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+const CAM_SENS = 50
 
+@onready var timer = $Timer
 @onready var camera = $Camera3D
 
-var capMouse = true
 var look_dir: Vector2
-var camera_sens = 50
+var teleported = false
 
 
 func _ready():
@@ -32,11 +33,7 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
 	if Input.is_action_just_pressed("Pause"):
-		capMouse = !capMouse
-		if capMouse:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		get_tree().quit()
 	_rotate_camera(delta)
 	move_and_slide()
 
@@ -48,6 +45,10 @@ func _input(event: InputEvent):
 func _rotate_camera(delta: float, sens_mod: float = 1.0):
 	var input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	look_dir += input
-	rotation.y -= look_dir.x * camera_sens * delta
-	camera.rotation.x = clamp(camera.rotation.x - look_dir.y * camera_sens * sens_mod * delta, -1.5, 1.5)
+	rotation.y -= look_dir.x * CAM_SENS * delta
+	camera.rotation.x = clamp(camera.rotation.x - look_dir.y * CAM_SENS * sens_mod * delta, -1.5, 1.5)
 	look_dir = Vector2.ZERO
+
+
+func _on_timer_timeout():
+	teleported = false

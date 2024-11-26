@@ -3,9 +3,11 @@
 [ext_resource type="Script" path="res://entities/player.gd" id="1_rbwfg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_44gwy"]
-radius = 0.1
+radius = 0.2
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_lh1st"]
+top_radius = 0.4
+bottom_radius = 0.4
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_rbwfg")
@@ -16,5 +18,11 @@ shape = SubResource("CapsuleShape3D_44gwy")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_lh1st")
 
-[node name="Camera3D" type="Camera3D" parent="." groups=["camera"]]
+[node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

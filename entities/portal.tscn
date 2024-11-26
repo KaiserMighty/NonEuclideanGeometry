@@ -18,12 +18,14 @@ shader_parameter/texture_albedo = SubResource("ViewportTexture_ng4ej")
 script = ExtResource("1_x8oh6")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+layers = 8
 size = Vector3(2, 3, 0)
 material = SubResource("ShaderMaterial_pdx0a")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
+cull_mask = 1048567
 current = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
